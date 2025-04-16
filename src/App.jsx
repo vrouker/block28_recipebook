@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useInsertionEffect } from 'react'
 import './App.css'
 import {Routes, Route, Link} from 'react-router-dom'
 import Home from "./components/Home"
@@ -21,17 +21,43 @@ function App() {
       setRecipes(data)
     }
     getRecipes();
+
+    const storedToken = localStorage.getItem("token")
+
+    if (storedToken){
+      setToken({token:storedToken})
+    }
+  }, [])
+
+  useEffect(()=>{
+    if (token){
+      localStorage.setItem("token", token)
+    }
   })
 
-  
+  const handleSignOut =()=>{
+    setToken("")
+    localStorage.clear(token)
+  }
 
   return (
     <>
       <div id = "navbar">
-        <Link to="/">Home</Link>
-        <Link to="/login">Log In!</Link>
-        <Link to="/signup">Sign Up!</Link>
-        <Link to="/favorites">Favorites</Link>
+        {
+          token ? 
+          <div>
+          <Link to="/">Home</Link>
+          <Link to="/login">Log In!</Link>
+          <Link to="/favorites">Favorites</Link>
+          <button onClick={handleSignOut}>Sign Out</button>
+          </div>
+           :  
+          <div>
+          <Link to="/">Home</Link>
+          <Link to="/login">Log In!</Link>
+          <Link to="/signup">Sign Up!</Link>
+          </div>
+        }
       </div>
       <div>
         <Routes>

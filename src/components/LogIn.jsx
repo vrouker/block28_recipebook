@@ -16,13 +16,14 @@ function LogIn({setToken}){
                 })
             });
             const result = await res.json();
-            console.log(result)
-            setToken(result.token)
+            setToken(result.token);
+            console.log(result.token)
         }
         catch (error){
             console.error(error)
         }
     }
+
     return(
         <form onSubmit={handleSubmit}>
             <label>
