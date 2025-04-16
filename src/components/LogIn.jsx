@@ -34,6 +34,7 @@ function LogIn({setToken}){
                     required
                 />
             </label>
+            <br/>
             <label>
                 Password:
                 <input
@@ -43,6 +44,7 @@ function LogIn({setToken}){
                     required
                 />
             </label>
+            <br/>
             <button>Log In!</button>
         </form>
     )
