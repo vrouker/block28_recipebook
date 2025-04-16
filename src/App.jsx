@@ -10,8 +10,8 @@ import SingleRecipe from './components/SingleRecipe'
 
 function App() {
   const [recipes, setRecipes] = useState([])
-
   const [singleRecipe, setSingleRecipe] = useState()
+  const [token, setToken] = useState()
   
   //Generate a list of recipes from the API on the home page
   useEffect(()=>{
@@ -37,7 +37,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home recipes={recipes} setRecipes={setRecipes} singleRecipe={singleRecipe} setSingleRecipe={setSingleRecipe}/>}/>
           <Route path="/login" element={<LogIn/>}/>
-          <Route path="/signup" element={<SignUp/>}/>
+          <Route path="/signup" element={<SignUp setToken={setToken} token={token}/>}/>
           <Route path="/favorites" element={<Favorites/>}/>
           <Route path="/singlerecipe" element={<SingleRecipe recipes={recipes} setRecipes={setRecipes} singleRecipe={singleRecipe} setSingleRecipe={setSingleRecipe}/>}/>
         </Routes>
