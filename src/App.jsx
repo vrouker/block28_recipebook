@@ -10,8 +10,10 @@ import SingleRecipe from './components/SingleRecipe'
 
 function App() {
   const [recipes, setRecipes] = useState([])
+
+  const [singleRecipe, setSingleRecipe] = useState()
   
-  
+  //Generate a list of recipes from the API on the home page
   useEffect(()=>{
     const getRecipes = async ()=>{
       const res = await fetch("https://fsa-recipe.up.railway.app/api/recipes")
@@ -21,6 +23,7 @@ function App() {
     getRecipes();
   })
 
+  
 
   return (
     <>
@@ -32,11 +35,11 @@ function App() {
       </div>
       <div>
         <Routes>
-          <Route path="/" element={<Home recipes={recipes} setRecipes={setRecipes}/>}/>
+          <Route path="/" element={<Home recipes={recipes} setRecipes={setRecipes} singleRecipe={singleRecipe} setSingleRecipe={setSingleRecipe}/>}/>
           <Route path="/login" element={<LogIn/>}/>
           <Route path="/signup" element={<SignUp/>}/>
           <Route path="/favorites" element={<Favorites/>}/>
-          <Route path="/singlerecipe" element={<SingleRecipe/>}/>
+          <Route path="/singlerecipe" element={<SingleRecipe recipes={recipes} setRecipes={setRecipes} singleRecipe={singleRecipe} setSingleRecipe={setSingleRecipe}/>}/>
         </Routes>
       </div>
       

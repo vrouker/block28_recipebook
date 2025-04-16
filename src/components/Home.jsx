@@ -1,10 +1,10 @@
 import {useNavigate} from 'react-router-dom'
 
-function Home({recipes, setRecipes}){
+function Home({recipes, setRecipes, singleRecipe, setSingleRecipe}){
     const navigate = useNavigate()
 
     const handleClick = (recipe) =>{
-        setRecipes (recipe)
+        setSingleRecipe(recipe)
         navigate("/singlerecipe")
     }
 
