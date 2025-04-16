@@ -2,7 +2,7 @@
 
 function SingleRecipe({singleRecipe, setSingleRecipe}){
 
-
+const token = localStorage.getItem("token")
     return(
         <>
             <h1>{singleRecipe.strMeal}</h1>
@@ -12,6 +12,9 @@ function SingleRecipe({singleRecipe, setSingleRecipe}){
             <h2>Cooking Instructions:</h2>
             <p>{singleRecipe.strInstructions}</p>
             <button>Link to How To video</button>
+            {
+                token ? <button>Add to Favorites!</button> : null
+            }
         </>
     )
 }
