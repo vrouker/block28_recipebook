@@ -36,7 +36,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Home recipes={recipes} setRecipes={setRecipes} singleRecipe={singleRecipe} setSingleRecipe={setSingleRecipe}/>}/>
-          <Route path="/login" element={<LogIn/>}/>
+          <Route path="/login" element={<LogIn token={token} setToken={setToken}/>}/>
           <Route path="/signup" element={<SignUp setToken={setToken} token={token}/>}/>
           <Route path="/favorites" element={<Favorites/>}/>
           <Route path="/singlerecipe" element={<SingleRecipe recipes={recipes} setRecipes={setRecipes} singleRecipe={singleRecipe} setSingleRecipe={setSingleRecipe}/>}/>
