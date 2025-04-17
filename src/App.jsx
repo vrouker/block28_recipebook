@@ -12,6 +12,7 @@ function App() {
   const [recipes, setRecipes] = useState([])
   const [singleRecipe, setSingleRecipe] = useState()
   const [token, setToken] = useState()
+  const [favRecipes, setFavRecipes] = useState ([])
   
   //Generate a list of recipes from the API on the home page
   useEffect(()=>{
@@ -62,10 +63,15 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Home recipes={recipes} setRecipes={setRecipes} singleRecipe={singleRecipe} setSingleRecipe={setSingleRecipe}/>}/>
+
           <Route path="/login" element={<LogIn token={token} setToken={setToken}/>}/>
+
           <Route path="/signup" element={<SignUp setToken={setToken} token={token}/>}/>
-          <Route path="/favorites" element={<Favorites/>}/>
-          <Route path="/singlerecipe" element={<SingleRecipe recipes={recipes} setRecipes={setRecipes} singleRecipe={singleRecipe} setSingleRecipe={setSingleRecipe}/>}/>
+
+          <Route path="/favorites" element={<Favorites favRecipes={favRecipes} setFavRecipes={setFavRecipes}/>}/>
+
+          <Route path="/singlerecipe" element={<SingleRecipe recipes={recipes} setRecipes={setRecipes} singleRecipe={singleRecipe} setSingleRecipe={setSingleRecipe} favRecipes={favRecipes} setFavRecipes={setFavRecipes}/>}/>
+          
         </Routes>
       </div>
       

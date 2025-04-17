@@ -1,8 +1,22 @@
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
-
-function SingleRecipe({singleRecipe, setSingleRecipe}){
+function SingleRecipe({singleRecipe, setSingleRecipe, favRecipes, setFavRecipes}){
 
 const token = localStorage.getItem("token")
+
+const handleFav = ()=>{
+    setFavRecipes([
+        ...favRecipes,
+        {
+            id: singleRecipe.idMeal,
+            name: singleRecipe.strMeal,
+            category: singleRecipe.strCategory,
+        }
+    ])
+    console.log(favRecipes)
+    }
     return(
         <>
             <h1>{singleRecipe.strMeal}</h1>
@@ -13,7 +27,7 @@ const token = localStorage.getItem("token")
             <p>{singleRecipe.strInstructions}</p>
             <button>Link to How To video</button>
             {
-                token ? <button>Add to Favorites!</button> : null
+                token ? <button onClick={handleFav}>Add to Favorites!</button> : null
             }
         </>
     )
