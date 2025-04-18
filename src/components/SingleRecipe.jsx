@@ -11,15 +11,23 @@ const handleFav = ()=>{
         ...favRecipes,
         {
             id: singleRecipe.idMeal,
+            image: singleRecipe.strMealThumb,
             name: singleRecipe.strMeal,
             category: singleRecipe.strCategory,
         }
     ])
     console.log(favRecipes)
     }
+
+    const favRecipeStrings = JSON.stringify(favRecipes)
+    const storedFavRecipes = localStorage.setItem("favRecipes", favRecipeStrings)
+
+
+
     return(
         <>
             <h1>{singleRecipe.strMeal}</h1>
+            <img src={singleRecipe.strMealThumb}/>
             <p>{singleRecipe.strArea}</p>
             <h2>Ingredients:</h2>
             <p>{singleRecipe.ingredients}</p>

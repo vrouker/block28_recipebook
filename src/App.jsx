@@ -28,6 +28,7 @@ function App() {
     if (storedToken){
       setToken({token:storedToken})
     }
+
   }, [])
 
   useEffect(()=>{
@@ -35,6 +36,8 @@ function App() {
       localStorage.setItem("token", token)
     }
   })
+
+ 
 
   const handleSignOut =()=>{
     setToken("")
@@ -71,7 +74,7 @@ function App() {
           <Route path="/favorites" element={<Favorites favRecipes={favRecipes} setFavRecipes={setFavRecipes}/>}/>
 
           <Route path="/singlerecipe" element={<SingleRecipe recipes={recipes} setRecipes={setRecipes} singleRecipe={singleRecipe} setSingleRecipe={setSingleRecipe} favRecipes={favRecipes} setFavRecipes={setFavRecipes}/>}/>
-          
+
         </Routes>
       </div>
       
