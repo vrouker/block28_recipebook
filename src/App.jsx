@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react'
 import './App.css'
-import {Routes, Route, Link} from 'react-router-dom'
+import {Routes, Route, Link, data} from 'react-router-dom'
 import Home from "./components/Home"
 import LogIn from"./components/LogIn"
 import SignUp from "./components/SignIn"
@@ -10,8 +10,8 @@ import SingleRecipe from './components/SingleRecipe'
 
 function App() {
   const [recipes, setRecipes] = useState([])
-  const [singleRecipe, setSingleRecipe] = useState()
-  const [token, setToken] = useState()
+  const [singleRecipe, setSingleRecipe] = useState({})
+  const [token, setToken] = useState("")
   const [favRecipes, setFavRecipes] = useState ([])
   
   //Generate a list of recipes from the API on the home page
@@ -26,7 +26,8 @@ function App() {
     const storedToken = localStorage.getItem("token")
 
     if (storedToken){
-      setToken({token:storedToken})
+      setToken(storedToken)
+      //setToken is a string, if you set it to an object, everything breaks KEEP IT A STRING
     }
 
   }, [])
@@ -35,7 +36,20 @@ function App() {
     if (token){
       localStorage.setItem("token", token)
     }
-  })
+  }, [token])
+
+    useEffect(()=>{
+      const getFavRecipes = async () => {
+        const response = await fetch ("https://fsa-recipe.up.railway.app/api/favorites", {
+          headers: {Authorization: `Bearer ${token}`}
+        })
+        const result = await response.json()
+        setFavRecipes(result.data)
+        console.log(result)
+      }
+      getFavRecipes();
+    }, [token])
+
 
   const handleSignOut =()=>{
     setToken("")

@@ -6,6 +6,8 @@ function SingleRecipe({singleRecipe, setSingleRecipe, favRecipes, setFavRecipes}
 
 const token = localStorage.getItem("token")
 
+const navigate = useNavigate()
+
 async function handleFav (){
     console.log(singleRecipe)
     try {
@@ -22,12 +24,14 @@ async function handleFav (){
         }
     )
         const result = await response.json();
-        setFavRecipes(result.data)
+        setFavRecipes(prevState => [...prevState,result.data])
+        //allows you to keep the previous state and add onto the end of the state
         console.log(result.data)
     }
     catch (error){
         console.log(error)
     }
+    navigate("/favorites")
 }
 
 //getting an error (4oo) Bad Request back from the API
