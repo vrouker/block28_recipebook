@@ -1,4 +1,4 @@
-import { useState, useEffect, useInsertionEffect } from 'react'
+import { useState, useEffect} from 'react'
 import './App.css'
 import {Routes, Route, Link} from 'react-router-dom'
 import Home from "./components/Home"
@@ -36,8 +36,6 @@ function App() {
       localStorage.setItem("token", token)
     }
   })
-
- 
 
   const handleSignOut =()=>{
     setToken("")

@@ -3,12 +3,11 @@ import { useState } from "react"
 
 function Favorites({favRecipes, setFavRecipes}){
 
-const retFavRecipes = localStorage.getItem("favRecipes")
-const favRecipeArray = JSON.parse(retFavRecipes)
 
 
     return(
       <>
+      <h1>Favorites!</h1>
       {
         favRecipeArray.map((favRecipe)=>
             <div key={favRecipe.id}>

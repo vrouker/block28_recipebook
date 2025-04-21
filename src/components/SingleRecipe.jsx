@@ -1,28 +1,36 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
+import {useNavigate} from 'react-router-dom'
 
 function SingleRecipe({singleRecipe, setSingleRecipe, favRecipes, setFavRecipes}){
 
 const token = localStorage.getItem("token")
 
-const handleFav = ()=>{
-    setFavRecipes([
-        ...favRecipes,
-        {
-            id: singleRecipe.idMeal,
-            image: singleRecipe.strMealThumb,
-            name: singleRecipe.strMeal,
-            category: singleRecipe.strCategory,
+async function handleFav (){
+    console.log(singleRecipe)
+    try {
+        const response = await fetch ("https://fsa-recipe.up.railway.app/api/favorites", {
+            method: "POST",
+            headers: {"Content-type": "application/json",
+                Authorization: `Bearer ${token}`},
+            body: JSON.stringify(
+                {mealId: singleRecipe.idMeal,
+                name: singleRecipe.strMeal,
+                imageUrl: singleRecipe.strMealThumb,
+                strArea: singleRecipe.strArea}
+            )
         }
-    ])
-    console.log(favRecipes)
+    )
+        const result = await response.json();
+        setFavRecipes(result.data)
+        console.log(result.data)
     }
+    catch (error){
+        console.log(error)
+    }
+}
 
-    const favRecipeStrings = JSON.stringify(favRecipes)
-    const storedFavRecipes = localStorage.setItem("favRecipes", favRecipeStrings)
-
-
+//getting an error (4oo) Bad Request back from the API
 
     return(
         <>
@@ -35,7 +43,7 @@ const handleFav = ()=>{
             <p>{singleRecipe.strInstructions}</p>
             <button>Link to How To video</button>
             {
-                token ? <button onClick={handleFav}>Add to Favorites!</button> : null
+                token ? <button onClick={handleFav} >Add to Favorites!</button> : null
             }
         </>
     )
